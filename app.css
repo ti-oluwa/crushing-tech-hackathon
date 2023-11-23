@@ -1,0 +1,1101 @@
+/* ****** Reset Styling ******* */
+*, *::before, *::after{
+    box-sizing: border-box;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    font: inherit;
+}
+
+
+
+/* *********** Generics ************ */
+
+:root{
+    --white: #FFFFFF;
+    --bg-light: #F1F1F1;
+    --bg-black: #1a1a1a;
+    --font-light: #F1F1F1;
+    --font-mid: #616161;
+    --font-dark: #475467;
+    --stroke-s50: #EBEBEB;
+    --stroke-s100: hsla(0, 0%, 0%, 0.07);
+    --stroke-s200: hsl(0, 0%, 100%, 0.2);
+    --gray-50: #656266;
+    --gray-100: #616161;
+    --gray-200: #322F33;
+    --gray-300: #1C181D;
+    --state-hover: #F7F7F7;
+    --state-pressed: #F0F0F0;
+    --state-focused: #005BD3;
+}
+
+img, svg, use, picture, video{
+    display: inline-block;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: inherit;
+}
+
+ul{
+    list-style: none;
+}
+
+body{
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+    background: var(--bg-light);
+    position: relative;
+    transition: all 10ms ease-out;
+    font-family: "Inter";
+}
+
+.container{
+    margin: 0 auto;
+    width: auto;
+    max-width: 80%;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+button{
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: inherit;
+}
+
+:focus{
+    outline: none;
+}
+
+.show-flex{
+    display: flex !important;
+}
+
+.show-block{
+    display: block !important;
+}
+
+
+/* ***************** Header **************** */
+
+header{
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background: var(--bg-black);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease-out;
+    color: var(--font-light);
+}
+
+header > nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    gap: 0 8px;
+}
+
+nav #shopify-logo{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: max-content;
+    flex-shrink: 0;
+}
+
+#shopify-logo > #full-logo{
+    display: inline-block;
+    width: 104.868px;
+    height: 30px;
+}
+
+#shopify-logo > #mini-logo{
+    display: none;
+    height: 32px;
+    width: 32px;
+}
+
+
+/* Search Bar */
+
+nav > #search-bar{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background: #303030;
+    border-radius: 8px;
+    border: 1px solid #616161;
+    width: 100%;
+    height: 32px;
+    max-width: 480px;
+    padding: 8px;
+    gap: 0 6px;
+    transition: all 50ms ease-out;
+}
+
+#search-bar > svg{
+    width: 20px;
+    height: 20px;
+}
+
+#search-bar > input{
+    background: transparent;
+    border: none;
+    outline: none;
+    flex: auto;
+    color: var(--font-light);
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 140%;
+}
+
+#search-bar > input::placeholder{
+    color: #B5B5B5;
+}
+
+#search-bar:hover{
+    border: 1px solid #E1E1E1;
+    background: var(--gray-200);
+}
+
+#search-bar:has(input:focus-visible){
+    border: 2px solid var(--white);
+    background: var(--gray-200);
+}
+
+#search-bar:has(input:active){
+    border: 2px solid var(--white);
+    background: var(--gray-200);
+}
+
+
+/* Navigation bar menus */
+
+nav > #nav-menu{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0 8px;
+    transition: all 50ms ease-out;
+    flex-shrink: 0;
+}
+
+
+/* Notification/alert Shade */
+
+#nav-menu .header-menu{
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 16px;
+    z-index: 100;
+}
+
+#nav-menu > #alert-shade{
+    transition: all 50ms ease-out;
+}
+
+#alert-shade > #alert-box-toggle{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    cursor: pointer;
+    background: var(--gray-200);
+    border-radius: 8px;
+    height: 32px;
+    width: 32px;
+}
+
+#alert-box-toggle > svg{
+    width: 20px;
+    height: 20px;
+}
+
+#alert-shade > #alert-box{
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px 0;
+    padding: 16px; 
+    border: 1px solid #DBDBDB;
+    background: var(--white);  
+    border-radius: 14px;
+    display: none;
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.05);
+}
+
+#alert-box > #alert-head{
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#alert-head > #alert-head-text{
+    color: var(--font-dark);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%;
+}
+
+#alert-head > #alert-head-icons{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0 16px;
+}
+
+#alert-head-icons > .alert-head-icon{
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#alert-box > #alert-body{
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 16px;
+    gap: 8px 0;
+    background: var(--bg-light);
+}
+
+#alert-body > #no-alert-msg{
+    color: var(--font-mid);
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%;
+    text-align: center;
+}
+
+/* Menu */
+
+#nav-menu > #menu{
+    border-radius: 8px;
+}
+
+#menu > #menu-dropdown-toggle{
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 2px 2px 2px 8px;
+    gap: 0 8px;
+    border-radius: inherit;
+    background: var(--gray-200);
+    cursor: pointer;
+}
+
+#menu-dropdown-toggle > #toggle-text{
+    color: var(--font-light, #E3E3E3);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%;
+    border-radius: inherit;
+}
+
+#menu-dropdown-toggle > #toggle-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 9px 5px 10px 5px;
+    height: 28px;
+    background: #36FBA1;
+    border-radius: 6px;
+}
+
+#toggle-icon > small{
+    color: rgba(0, 0, 0, 0.40);
+    text-align: center;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%;
+}
+
+#menu > #menu-dropdown{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 0; 
+    border: 1px solid #DBDBDB;
+    background: var(--white);  
+    border-radius: 14px;
+    width: 320px;
+    display: none;
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.05);
+}
+
+#menu-dropdown > .dropdown-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 6px;
+    gap: 4px 0;
+    width: 100%;
+}
+
+#menu-dropdown > .dropdown-section *:is(a, li){
+    width: 100%;
+    border-radius: 8px;
+}
+
+#menu-dropdown > .dropdown-section .menu-item{
+    padding: 6px;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%;
+    color: #303030;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#menu-dropdown > #dropdown-header{
+    padding-bottom: 2px;
+    border-bottom: 0.75px solid #E1E1E1;
+}
+
+#dropdown-header > #account-detail{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 12px 4px 8px;
+    border-radius: 8px;
+    background: var(--bg-light);
+}
+
+#account-detail > #account-info{
+    display: flex;
+    align-items: center;
+    gap: 0 8px;
+}
+
+#account-info > #account-initials{
+    display: flex;
+    width: 28px;
+    height: 28px;
+    padding: 9.625px 5.875px 10.375px 6.125px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5.25px;
+    background: #36FBA1;
+}
+
+#account-initials > small{
+    color: rgba(0, 0, 0, 0.40);
+    text-align: center;
+    font-size: 10.5px;
+    font-style: normal;
+    font-weight: 500;
+    /* line-height: 140%; */
+}
+
+#account-info > #account-name{
+    color: #303030;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%;
+}
+
+#menu-dropdown > #dropdown-header .menu-item{
+    gap: 0 8px;
+}
+
+#menu-dropdown > #dropdown-main{
+    padding-block: 2px;
+    border-bottom: 0.75px solid #E1E1E1;
+}
+
+#menu-dropdown > #dropdown-footer{
+    padding-top: 2px;
+}
+
+#dropdown-footer > #account-owner-info{
+    padding: 8px;
+}
+
+#account-owner-info > #account-owner-name{
+    color: #303030;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 140%;
+}
+
+#account-owner-info > #account-owner-email{
+    color: var(--font-mid);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+}
+
+/* When any of the header menus is open */
+#alert-shade:has(#alert-box.show-flex) > #alert-box-toggle, #menu:has(#menu-dropdown.show-flex) > #menu-dropdown-toggle{
+    background: var(--gray-50);
+}
+
+
+/* *********** Main Section ************ */
+
+main{
+    width: 100%;
+    max-width: 800px;
+    margin: 32px auto 14px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+/* **** Select Plan Modal *****  */
+
+main > #select-plan-section{
+    display: flex;
+    width: 100%;
+    padding: 12px 8px 12px 16px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+    background: #1A1A1A;
+    gap: 16px 8px;
+}
+
+#select-plan-section .close-select-plan-section-btn{
+    padding: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    flex-shrink: 0;
+    line-height: 0;
+}
+
+.close-select-plan-section-btn > svg{
+    width: 20px;
+    height: 20px;
+}
+
+#select-plan-section > #select-plan-section-main{
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+#select-plan-section-main > #select-plan-section-text{
+    color: var(--font-light);
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 140%;
+}
+
+#select-plan-section-main > .close-select-plan-section-btn{
+    display: none;
+    padding: 8px;
+}
+
+#select-plan-section > #select-plan-section-btns{
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0 8px;
+    flex-shrink: 0;
+}
+
+#select-plan-section-btns > #select-plan-btn{
+    text-align: center;
+    display: inline-flex;
+    padding: 6px 12px;
+    align-items: center;
+    gap: 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(0, 0, 0, 0.10);
+    background: var(--white);
+    box-shadow: 0px -1px 0px 0px #B5B5B5 inset;
+    flex-shrink: 0;
+}
+
+#select-plan-btn > p{
+    color: #323232;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 130%;
+}
+
+.hide-select-plan-section{
+    visibility: hidden; /* Based on design prototype, the select plan section should be hidden when the user is on a large screen */
+}
+
+
+/* ****** Setup Guide Section ******** */
+
+main > #setup-guide-section{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    gap: 16px 0;
+    border-radius: 18px;
+    border: 1px solid #DBDBDB;
+    background: var(--white);
+    box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.05);
+    padding: 8px;
+    transition: all 10ms ease-out;
+}
+
+#setup-guide-section > #setup-guide-opener{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: inherit;
+}
+
+#setup-guide-opener > #setup-guide-intro{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 16px 0;
+}
+
+#setup-guide-intro > #intro-text{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 4px 0;
+}
+
+#intro-text p:first-of-type{
+    color: #303030;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%;
+}
+
+#intro-text p:last-of-type{
+    color: #303030;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%;
+}
+
+#setup-guide-intro > #setup-progress{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0 8px;
+}
+
+#setup-progress > #progress-text{
+    color: #303030;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+}
+
+#setup-progress > #progress-bar > #progress-indicator{
+    transition: all 80ms ease-out;
+}
+
+#setup-guide-opener > #setup-guide-toggle{
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    border-radius: 6px;
+    transition: transform 50ms ease-out;
+    pointer-events: auto !important;
+}
+
+#setup-guide-section:has(#setup-guide-main.show-flex) > #setup-guide-opener > #setup-guide-toggle{
+    transform: rotate(180deg);
+}
+
+#setup-guide-section:has(#setup-guide-main.show-flex) > #setup-guide-opener{
+    pointer-events: none;
+}
+
+#setup-guide-main{
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+#setup-guide-main > .setup-step{
+    display: flex;
+    padding: 8px 8px 12px 8px;
+    align-items: center;
+    gap: 0 96px;
+    align-self: stretch;
+    width: 100%;
+    border-radius: 10px;
+    background: #F3F3F3;
+}
+
+.setup-step > .setup-step-main{
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 0 8px;
+    flex: 1 0 0;
+}
+
+.setup-step-main > .check-marker{
+    display: flex;
+    width: auto;
+    align-self: stretch;
+}
+
+.check-marker > .check{
+    position: relative;
+    isolation: isolate;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 50ms ease-out;
+}
+
+/* Necessary styling and animations for when a setup step's checkbox is checked */
+
+.check > input[type=checkbox]{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    appearance: none; /* Makes checkbox to not be visible but still clickable */
+    cursor: pointer;
+    border-radius: inherit;
+}
+
+.check::after{
+    content: "";
+    position: absolute;
+    z-index: 10;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background: transparent;
+    background-image: url("https://crushingit.tech/hackathon-assets/icon-spinner.svg");
+    filter: invert(1) contrast(1.5);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    opacity: 1;
+    visibility: hidden;
+    transform: rotate(0deg);
+}
+
+@keyframes checked-for-after {
+    0%{
+        transform: rotate(0deg);
+        opacity: 1;
+    }
+
+    100%{
+        transform: rotate(540deg);
+        opacity: 0;
+    }
+}
+
+.check::before{
+    content: "";
+    position: absolute;
+    z-index: 100;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background: transparent;
+    background-image: url("https://crushingit.tech/hackathon-assets/icon-checkmark-circle.svg");
+    filter: contrast(1.2);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.4) rotate(0deg);
+}
+
+@keyframes checked-for-before {
+    0%{
+        transform: scale(0.4) rotate(-540deg);
+        opacity: 0;
+    }
+
+    100%{
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    } 
+}
+
+.check:has(input:checked) > svg{
+    visibility: hidden;
+}
+
+.check:has(input:checked)::after{
+    visibility: visible !important;
+    animation: checked-for-after 100ms ease-out;
+    animation-fill-mode: forwards;
+}
+
+.check:has(input:checked)::before{
+    visibility: visible !important;
+    animation: checked-for-before 100ms ease-out;
+    animation-fill-mode: forwards;
+    animation-delay: 70ms;
+}
+
+
+/* *************************************************** */
+
+.setup-step-main > .setup-step-info{
+    display: flex;
+    padding: 2px 0px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    flex: 1 0 0;
+}
+
+.setup-step-info > .step-title{
+    color: #303030;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%;
+}
+
+.setup-step-info > .step-description{
+    color: var(--font-mid);
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 140%;
+}
+
+.step-description > a{
+    color: #005BD3;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 140%;
+    border-radius: 2px;
+    display: inline-block;
+}
+
+.setup-step-info .step-btns{
+    display: flex;
+    align-items: flex-start;
+    gap: 0 16px;
+}
+
+.step-btns > .step-btn{
+    display: inline-flex;
+    padding: 6px 12px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+}
+
+.step-btns > .step-btn-dark{
+    border-top: 1.5px solid rgba(255, 255, 255, 0.20);
+    border-right: 1.5px solid rgba(255, 255, 255, 0.20);
+    border-left: 1.5px solid rgba(255, 255, 255, 0.20);
+    background: #404040;
+    box-shadow: 0px 0px 0px 1.5px #333, 0px 1px 0px 1.5px #333, 0px 2px 0px 0px #000;
+
+    color: #F6F3F6;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 130%;
+}
+
+.step-btns > .step-btn-trans{
+    color: #323232;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 130%;
+}
+
+.setup-step > .setup-step-img{
+    width: 156.145px;
+    height: 120px;
+    flex-shrink: 0;
+}
+
+.setup-step-img > img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Close setup step */
+.close-setup-step{
+    background: var(--white) !important;
+    cursor: pointer;
+    pointer-events: auto !important;
+}
+
+/* Only .setup-title and .check-marker should be visible when setup step is closed */
+.close-setup-step *:is(.step-description, .step-btns, .setup-step-img){
+    display: none !important;
+}
+
+
+/* ********** Keyboard Accessibility ********** */
+
+/* Navigation menu */
+#alert-shade > #alert-box-toggle:focus-visible, #menu > #menu-dropdown-toggle:focus-visible{
+    background: var(--gray-50);
+    box-shadow: 0px 0px 0px 3px var(--state-focused), 0px 0px 0px 1px #000;
+}
+
+#alert-head-icons > .alert-head-icon:focus-visible{
+    border: 2px solid var(--state-focused);
+}
+
+#menu-dropdown > .dropdown-section a:focus-visible{
+    border: 2px solid var(--state-focused);
+}
+
+/* Select plan section */
+#select-plan-section > #select-plan-btn:focus-visible{
+    box-shadow: 0px 0px 0px 3px var(--state-focused), 0px 0px 0px 1px #FFF, 0px -1px 0px 0px #B5B5B5 inset !important;
+}
+
+#select-plan-section .close-select-plan-section-btn:focus-visible{
+    border: 2px solid var(--state-focused);
+}
+
+/* Setup section */
+#setup-guide-toggle:focus-visible{
+    border: 2px solid var(--state-focused);
+}
+
+.check > input:focus-visible{
+    border: 2px solid var(--state-focused);
+}
+
+.check:has(input:hover, input:focus-visible) > svg > circle{
+    stroke-dasharray: 0;
+}
+
+.step-description > a:focus-visible{
+    border: 2px solid var(--state-focused);
+}
+
+.step-btns > .step-btn-dark:focus-visible{
+    box-shadow: 0px 0px 0px 5px #005BD3, 0px 0px 0px 3px #FFF, 0px 0px 0px 1.5px #333;
+}
+
+.step-btns > .step-btn-trans:focus-visible{
+    border: 2px solid var(--state-focused);
+    background: var(--white);
+}
+
+
+
+/* *********************** Media Queries ********************** */
+
+/* ****** For devices that support mouse pointer events ****** */
+@media (hover:hover) {
+    /* Navigation Menu/Toggles/Icons States */
+    #alert-shade > #alert-box-toggle:hover, #menu > #menu-dropdown-toggle:hover{
+        background: var(--font-mid);
+    }
+
+    #alert-shade > #alert-box-toggle:active, #menu > #menu-dropdown-toggle:active{
+        background: var(--gray-50);
+    }
+
+    #menu-dropdown > .dropdown-section .menu-item:hover{
+        background: var(--state-hover);
+    }
+
+    #menu-dropdown > .dropdown-section .menu-item:active{
+        background: var(--state-pressed);
+    }
+
+
+    /* Select Plan Section Elements States */
+    #select-plan-section > #select-plan-btn:hover{
+        border: 1px solid rgba(0, 0, 0, 0.10);
+        background: #F7F7F7;
+        box-shadow: 0px -1px 0px 0px #B5B5B5 inset;
+    }
+
+    #select-plan-section > #select-plan-btn:active{
+        border-radius: 6px;
+        background: #F7F7F7;
+        box-shadow: 0px 2px 1.5px 0px #E2E2E2 inset;
+    }
+
+
+    /* Setup Section Elements States */
+
+    #setup-guide-toggle:hover{
+        background: #F1F1F1;
+    }
+
+    #setup-guide-toggle:active{
+        background: #F0F0F0;
+    }
+
+    .check:has(input:active) > svg > circle{
+        stroke-dasharray: 0;
+        fill: #D9D9D9;
+    }
+
+    .step-btns > .step-btn-dark:hover{
+        background: #2A2A2A;
+    }
+
+    .step-btns > .step-btn-dark:active{
+        background: #2B2B2B;
+        box-shadow: 0px 0px 0px 1.5px #333, 0px 3px 0px 0px #000 inset;
+    }
+
+    .step-btns > .step-btn-trans:hover{
+        background: #E7E7E7;
+    }
+
+    .step-btns > .step-btn-trans:active{
+        background: #E0E0E0;
+    }
+
+}
+
+
+@media screen and (max-width: 800px){
+    main{
+        margin-top: 28px;
+    }
+
+    main > *:is(#setup-guide-section, #select-plan-section){
+        border-radius: 0px;
+    }
+
+    .hide-select-plan-section{
+        display: none !important;
+    }
+}
+
+
+@media screen and (max-width: 720px) {
+    #shopify-logo > #mini-logo{
+        display: inline-block;
+    }
+
+    #shopify-logo > #full-logo{
+        display: none;
+    }
+}
+
+
+@media screen and (max-width: 580px) {
+    .setup-step > .setup-step-img{
+        display: none;
+    }
+    
+}
+
+
+@media screen and (max-width: 480px) {
+    #alert-shade > #alert-box-toggle{
+        padding: 6px;
+    }
+
+    #menu > #menu-dropdown-toggle{
+        padding: 2px;
+        background: transparent;
+    }
+
+    #menu-dropdown-toggle > #toggle-text{
+        display: none;
+    }
+
+    main:has(#select-plan-section.hide-select-plan-section){
+        margin-top: 16px;
+    }
+    
+    main > #select-plan-section{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #select-plan-section > #select-plan-section-main{
+        align-self: stretch;
+    }
+
+    #select-plan-section-main > .close-select-plan-section-btn{
+        display: inline-block;
+    }
+
+    #select-plan-section-btns > .close-select-plan-section-btn{
+        display: none;
+    }
+}
+
+
+@media screen and (max-width: 400px) {
+    #nav-menu .header-menu{
+        top: calc(100% + 12px);
+    }
+
+    #alert-shade > #alert-box{
+        right: 50%;
+        transform: translateX(50%);
+        max-width: 358px;
+    }
+
+    #alert-body > #no-alert-msg{
+        color: #303030;
+    }
+}
