@@ -70,7 +70,7 @@ function updateProgress(){
 }
 
 
-// Set helper properties/functions on setup steps
+// Set helper methods on setup steps
 setupSteps.forEach((setupStep) => {
     setupStep.isExpanded = () => {return !setupStep.classList.contains('close-setup-step')};
 
@@ -78,6 +78,7 @@ setupSteps.forEach((setupStep) => {
     setupStep.expand = function() { 
         this.classList.remove('close-setup-step');
         setAriaExpanded(this, true);
+
         setupSteps.forEach(step => {
             if (step !== this && step.isExpanded()) {
                 step.collapse();
@@ -93,7 +94,7 @@ setupSteps.forEach((setupStep) => {
 });
 
 
-// Set helper properties/functions on setup step checkboxes
+// Set helper properties/methods on setup step checkboxes
 setupStepCheckboxes.forEach((checkbox) => {
     // Set the index of each checkbox
     checkbox.index = Array.from(setupStepCheckboxes).indexOf(checkbox);
@@ -176,8 +177,8 @@ setupStepCheckboxes.forEach((checkbox) => {
         if (nextUncheckedCheckbox) {
             // Get the step that contains the next unchecked checkbox
             let nextUncheckedCheckboxSetupStep = setupSteps[nextUncheckedCheckbox.index];
-            // Click on next uncompleted setup step to open it
-            nextUncheckedCheckboxSetupStep.click();
+            // expand the next uncompleted setup step
+            nextUncheckedCheckboxSetupStep.expand();
         };
     };
 
@@ -205,11 +206,13 @@ document.body.onclick = (e) => {
 }
 
 
+
 // Prevent search form from submitting
 searchForm.onsubmit = (e) => {
     e.stopImmediatePropagation();
     e.preventDefault();
 }
+
 
 
 // Open/close notification/alert box on click or enter key press
@@ -227,6 +230,7 @@ alertBoxToggle.onkeydown = (e) => {
 }
 
 
+
 // Open/close dropdown menu on click or enter key press
 dropdownMenuToggle.onclick = () => {
     dropdownMenu.classList.toggle('show-flex');
@@ -238,6 +242,7 @@ dropdownMenuToggle.onkeydown = (e) => {
         dropdownMenuToggle.click();
     };
 }
+
 
 
 // Open/close select plan modal on click or enter key press
@@ -259,21 +264,14 @@ closeSelectPlanModalBtns.forEach(btn => {
 
 // Expand/collapse setup guide on click
 mainSetupGuideOpener.onclick = () => {
-    mainSetupGuide.classList.toggle('hide');
-    setAriaExpandedByShowFlex(mainSetupGuide);
-
-    // Reset setup steps to initial state if setup guide is closed (Based on design prototype)
-    if (!mainSetupGuide.classList.contains('show-flex')) {
-        setupSteps.forEach((setupStep, index) => {
-            // Close all setup steps but leave the first one open
-            if (index !== 0){
-                setupStep.collapse();
-            }else{
-                setupStep.expand();
-            };
-        });
-    }
+    mainSetupGuide.classList.toggle('hide-main-setup-guide');
+    if (mainSetupGuide.classList.contains('hide-main-setup-guide')) {
+        setAriaExpanded(mainSetupGuide, false);
+    }else{
+        setAriaExpanded(mainSetupGuide, true);
+    };
 }
+
 
 
 // Expand/collapse setup steps on click or enter key press
@@ -290,14 +288,16 @@ setupSteps.forEach((setupStep) => {
 
     setupStep.onkeydown = (e) => {
         if (e.key === 'Enter') {
-            // Open setup step that received Enter key anywhere except its checkbox
+            // Expand setup step that received Enter key anywhere except its checkbox
+            // if it is not already expanded
             if (!setupStepCheckbox.contains(e.target) && !setupStep.isExpanded()){
-                setupStep.collapse();
+                setupStep.expand();
             };
         };
     };
     
 });
+
 
 
 // Check/uncheck setup step checkboxes on click or enter key press

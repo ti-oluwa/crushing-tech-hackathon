@@ -86,9 +86,6 @@ button{
     display: block !important;
 }
 
-.hide{
-    display: none !important;
-}
 
 /* ***************** Header **************** */
 
@@ -160,7 +157,8 @@ nav > #search-bar{
     background: transparent;
     border: none;
     outline: none;
-    flex: auto;
+    width: 100%;
+    flex-shrink: 1;
     color: var(--font-light);
     font-size: 13px;
     font-style: normal;
@@ -646,15 +644,15 @@ main > #setup-guide-section{
     justify-content: center;
     padding: 4px;
     border-radius: 6px;
-    transition: transform 50ms ease-in;
+    transition: all 100ms ease-in;
     pointer-events: auto !important;
 }
 
-#setup-guide-section:has(#setup-guide-main.hide) > #setup-guide-opener > #setup-guide-toggle{
+#setup-guide-section:has(#setup-guide-main.hide-main-setup-guide) > #setup-guide-opener > #setup-guide-toggle{
     transform: rotate(-180deg);
 }
 
-#setup-guide-section:not(:has(#setup-guide-main.hide)) > #setup-guide-opener{
+#setup-guide-section:not(:has(#setup-guide-main.hide-main-setup-guide)) > #setup-guide-opener{
     pointer-events: none;
 }
 
@@ -664,6 +662,14 @@ main > #setup-guide-section{
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
+}
+
+.hide-main-setup-guide{
+    position: absolute !important;
+    /* Move element off screen */
+    /* This is safe and page won't overflow because its position is absolute */
+    top: -100vmax !important;
+    opacity: 0 !important;
 }
 
 #setup-guide-main > .setup-step{
@@ -934,7 +940,11 @@ main > #setup-guide-section{
 
 /* ********** Keyboard Accessibility ********** */
 
-/* Navigation menu */
+/* Header/Navigation menu */
+a#header-logo:focus-visible{
+    box-shadow: 0px 0px 0px 3px var(--state-focused), 0px 0px 0px 1px #000;
+}
+
 #alert-shade > #alert-box-toggle:focus-visible, #menu > #menu-dropdown-toggle:focus-visible{
     background: var(--gray-50);
     box-shadow: 0px 0px 0px 3px var(--state-focused), 0px 0px 0px 1px #000;
@@ -954,7 +964,7 @@ main > #setup-guide-section{
 }
 
 #select-plan-section .close-select-plan-section-btn:focus-visible{
-    border: 2px solid var(--state-focused);
+    box-shadow: 0px 0px 0px 3px var(--state-focused), 0px 0px 0px 1px #000;
 }
 
 /* Setup section */
@@ -970,8 +980,12 @@ main > #setup-guide-section{
     stroke-dasharray: 0;
 }
 
+.setup-step-main .step-title:focus-visible{
+    box-shadow: 0px 0px 0px 3px var(--state-focused), 0px 0px 0px 1px #000;
+}
+
 .step-description > a:focus-visible{
-    border: 2px solid var(--state-focused);
+    box-shadow: 0px 0px 0px 3px var(--state-focused), 0px 0px 0px 1px #000;
 }
 
 .step-btns > .step-btn-dark:focus-visible{
@@ -1146,3 +1160,4 @@ main > #setup-guide-section{
         color: #303030;
     }
 }
+
