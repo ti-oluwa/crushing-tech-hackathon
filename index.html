@@ -35,7 +35,7 @@
     <header>
         <nav>
             <!-- Shopify Logo -->
-            <a target="_blank" href="#" role="link" aria-label="Shopify" tabindex="-1">
+            <a target="_blank" href="//shopify.com" role="link" aria-label="Shopify" tabindex="-1">
                 <div id="shopify-logo">
                     <svg id="full-logo" xmlns="http://www.w3.org/2000/svg" width="105" height="30" viewBox="0 0 105 30" fill="none">
                         <path d="M36.2166 16.6517C35.3235 16.1564 34.8535 15.7555 34.8535 15.1895C34.8535 14.4584 35.4881 14.0103 36.4987 14.0103C37.6738 14.0103 38.7079 14.5056 38.7079 14.5056L39.5305 11.9821C39.5305 11.9821 38.7784 11.3925 36.5457 11.3925C33.4433 11.3925 31.2811 13.1849 31.2811 15.6847C31.2811 17.0998 32.2917 18.1846 33.6313 18.9629C34.7125 19.5761 35.0885 20.0241 35.0885 20.6609C35.0885 21.3448 34.5479 21.8873 33.5373 21.8873C32.0332 21.8873 30.623 21.109 30.623 21.109L29.7534 23.6325C29.7534 23.6325 31.0696 24.505 33.2553 24.505C36.4517 24.505 38.7314 22.9249 38.7314 20.0949C38.7784 18.5384 37.6033 17.4535 36.2166 16.6517Z" fill="white"/>
@@ -57,13 +57,13 @@
                 </div>
             </a>
             
-            <div id="search-bar" role="searchbox" aria-label="Search bar">
+            <form id="search-bar" role="searchbox" aria-label="Search bar" aria-details="Search shopify.com for information">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 13 14" fill="none">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M8.82264 10.3833C7.89957 11.0841 6.74835 11.5 5.5 11.5C2.46243 11.5 0 9.03757 0 6C0 2.96243 2.46243 0.5 5.5 0.5C8.53757 0.5 11 2.96243 11 6C11 7.24835 10.5841 8.39957 9.8833 9.32264L12.7803 12.2197C13.0732 12.5126 13.0732 12.9874 12.7803 13.2803C12.4874 13.5732 12.0126 13.5732 11.7197 13.2803L8.82264 10.3833ZM9.5 6C9.5 8.20914 7.70914 10 5.5 10C3.29086 10 1.5 8.20914 1.5 6C1.5 3.79086 3.29086 2 5.5 2C7.70914 2 9.5 3.79086 9.5 6Z" fill="#B5B5B5"/>
                 </svg>
 
                 <input type="text" placeholder="Search" tabindex="1" role="search" aria-label="Search">
-            </div>
+            </form>
 
             <div id="nav-menu" role="navigation" aria-label="Notifications and dropdown menu bar">
                 <div id="alert-shade">
@@ -229,9 +229,11 @@
             </div>
 
             <div id="select-plan-section-btns">
-                <button type="button" id="select-plan-btn" tabindex="14" role="button" aria-label="Select a plan">
-                    <p>Select a plan</p>
-                </button>
+                <a href="//shopify.com/pricing">
+                    <button type="button" id="select-plan-btn" tabindex="14" role="button" aria-label="Select a plan">
+                        <p>Select a plan</p>
+                    </button>
+                </a>
     
                 <button type="button" class="close-select-plan-section-btn" tabindex="15" role="button" aria-label="Close select plan modal">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -270,7 +272,7 @@
     
                 <button type="button" id="setup-guide-toggle" tabindex="15" role="button" aria-label="View setup steps">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.71967 8.46967C6.01256 8.17678 6.48744 8.17678 6.78033 8.46967L10.25 11.9393L13.7197 8.46967C14.0126 8.17678 14.4874 8.17678 14.7803 8.46967C15.0732 8.76256 15.0732 9.23744 14.7803 9.53033L10.7803 13.5303C10.4874 13.8232 10.0126 13.8232 9.71967 13.5303L5.71967 9.53033C5.42678 9.23744 5.42678 8.76256 5.71967 8.46967Z" fill="#4A4A4A"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M14.5303 12.2803C14.2374 12.5732 13.7626 12.5732 13.4697 12.2803L10 8.81066L6.53033 12.2803C6.23744 12.5732 5.76256 12.5732 5.46967 12.2803C5.17678 11.9874 5.17678 11.5126 5.46967 11.2197L9.46967 7.21967C9.76256 6.92678 10.2374 6.92678 10.5303 7.21967L14.5303 11.2197C14.8232 11.5126 14.8232 11.9874 14.5303 12.2803Z" fill="#4A4A4A"/>
                     </svg>
                 </button>
             </div>

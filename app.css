@@ -48,6 +48,7 @@ body{
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased !important;
     -moz-osx-font-smoothing: grayscale !important;
+    -webkit-tap-highlight-color: transparent;
     background: var(--bg-light);
     position: relative;
     transition: all 10ms ease-out;
@@ -73,7 +74,7 @@ button{
     color: inherit;
 }
 
-:focus{
+*:focus{
     outline: none;
 }
 
@@ -85,6 +86,9 @@ button{
     display: block !important;
 }
 
+.hide{
+    display: none !important;
+}
 
 /* ***************** Header **************** */
 
@@ -531,7 +535,7 @@ main > #select-plan-section{
     flex-shrink: 0;
 }
 
-#select-plan-section-btns > #select-plan-btn{
+#select-plan-section-btns #select-plan-btn{
     text-align: center;
     display: inline-flex;
     padding: 6px 12px;
@@ -642,21 +646,21 @@ main > #setup-guide-section{
     justify-content: center;
     padding: 4px;
     border-radius: 6px;
-    transition: transform 50ms ease-out;
+    transition: transform 50ms ease-in;
     pointer-events: auto !important;
 }
 
-#setup-guide-section:has(#setup-guide-main.show-flex) > #setup-guide-opener > #setup-guide-toggle{
-    transform: rotate(180deg);
+#setup-guide-section:has(#setup-guide-main.hide) > #setup-guide-opener > #setup-guide-toggle{
+    transform: rotate(-180deg);
 }
 
-#setup-guide-section:has(#setup-guide-main.show-flex) > #setup-guide-opener{
+#setup-guide-section:not(:has(#setup-guide-main.hide)) > #setup-guide-opener{
     pointer-events: none;
 }
 
 #setup-guide-main{
     width: 100%;
-    display: none;
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
@@ -724,19 +728,37 @@ main > #setup-guide-section{
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    opacity: 1;
-    visibility: hidden;
+    opacity: 0.6;
     transform: rotate(0deg);
+    visibility: hidden; /* Spinner should be hidden by default */
 }
 
 @keyframes checked-for-after {
     0%{
         transform: rotate(0deg);
-        opacity: 1;
+        opacity: 0.6;
+    }
+
+    25% {
+        opacity: 0.6;
+    }
+
+    50%{
+        /* Rotate spinner 270deg for first spin */
+        /* 270deg was used instead of 360deg based on Figma design */
+        transform: rotate(270deg); 
+        opacity: 0.6;
+    }
+
+    75%{
+        /* Spinner should be almost completely visible for 75% of the animation and then start to fade out */
+        opacity: 0.6;
     }
 
     100%{
+        /* Rotate spinner 270deg again (making 540deg), for second spin */
         transform: rotate(540deg);
+        /* Finally, spinner is completely invisible */
         opacity: 0;
     }
 }
@@ -751,23 +773,43 @@ main > #setup-guide-section{
     border-radius: inherit;
     background: transparent;
     background-image: url("https://crushingit.tech/hackathon-assets/icon-checkmark-circle.svg");
-    filter: contrast(1.2);
+    filter: contrast(1.05); /* Improves visibility of checkmark circle */
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     opacity: 0;
-    visibility: hidden;
-    transform: scale(0.4) rotate(0deg);
+    transform: scale(0.6) rotate(-45deg);
+    visibility: hidden; /* Checkmark circle should be hidden by default */
 }
 
 @keyframes checked-for-before {
     0%{
-        transform: scale(0.4) rotate(-540deg);
-        opacity: 0;
+        transform: scale(0.6) rotate(-45deg);
+        opacity: 0.3;
+    }
+
+    25%{
+        transform: scale(0.6) rotate(-45deg);
+        opacity: 0.3;
+    }
+
+    50%{
+        /* Checkmark circle should be rotated at -45deg(45deg counter-clockwise), to keep the tail of checkmark at 12'O clock, for 50% of the animation */
+        transform: scale(0.6) rotate(-45deg);
+        /* Make checkmark circle partially visible for 50% of the animation and then gradually start to make it completely visible */
+        opacity: 0.3;
+    }
+
+    95%{
+        /* Increase checkmark circle size by a factor of 1.2, to start bounce effect */
+        /* Return checkmark tail to original postion (45deg clockwise) */
+        transform: scale(1.2) rotate(0deg);
     }
 
     100%{
+        /* Return checkmark circle to original size, to complete bounce effect */
         transform: scale(1) rotate(0deg);
+        /* Finally, make checkmark completely visible */
         opacity: 1;
     } 
 }
@@ -777,16 +819,17 @@ main > #setup-guide-section{
 }
 
 .check:has(input:checked)::after{
-    visibility: visible !important;
-    animation: checked-for-after 100ms ease-out;
+    visibility: visible !important; /* Make spinner visible when checkbox is checked */
+    animation: checked-for-after 200ms ease-out;
     animation-fill-mode: forwards;
 }
 
 .check:has(input:checked)::before{
-    visibility: visible !important;
-    animation: checked-for-before 100ms ease-out;
+    visibility: visible !important; /* Make checkmark circle visible when checkbox is checked */
+    animation: checked-for-before 200ms ease-out;
     animation-fill-mode: forwards;
-    animation-delay: 70ms;
+    /* Delay checkmark circle animation by 75% of the spinner animation duration, to allow spinner animation to have substantial head start */
+    animation-delay: calc(0.75 * 200ms);
 }
 
 
@@ -906,7 +949,7 @@ main > #setup-guide-section{
 }
 
 /* Select plan section */
-#select-plan-section > #select-plan-btn:focus-visible{
+#select-plan-section #select-plan-btn:focus-visible{
     box-shadow: 0px 0px 0px 3px var(--state-focused), 0px 0px 0px 1px #FFF, 0px -1px 0px 0px #B5B5B5 inset !important;
 }
 
@@ -923,7 +966,7 @@ main > #setup-guide-section{
     border: 2px solid var(--state-focused);
 }
 
-.check:has(input:hover, input:focus-visible) > svg > circle{
+.check:has(input:focus-visible) > svg > circle{
     stroke-dasharray: 0;
 }
 
@@ -965,13 +1008,13 @@ main > #setup-guide-section{
 
 
     /* Select Plan Section Elements States */
-    #select-plan-section > #select-plan-btn:hover{
+    #select-plan-section #select-plan-btn:hover{
         border: 1px solid rgba(0, 0, 0, 0.10);
         background: #F7F7F7;
         box-shadow: 0px -1px 0px 0px #B5B5B5 inset;
     }
 
-    #select-plan-section > #select-plan-btn:active{
+    #select-plan-section #select-plan-btn:active{
         border-radius: 6px;
         background: #F7F7F7;
         box-shadow: 0px 2px 1.5px 0px #E2E2E2 inset;
@@ -986,6 +1029,10 @@ main > #setup-guide-section{
 
     #setup-guide-toggle:active{
         background: #F0F0F0;
+    }
+
+    .check:has(input:hover) > svg > circle{
+        stroke-dasharray: 0;
     }
 
     .check:has(input:active) > svg > circle{
