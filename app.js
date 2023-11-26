@@ -1,10 +1,7 @@
 // Header related
 const headerMenus = document.querySelectorAll('.header-menu');
+const headerMenuToggles = document.querySelectorAll('.header-menu-toggle');
 const searchForm = document.querySelector('#search-bar');
-const alertBox = document.querySelector('#alert-box');
-const alertBoxToggle = document.querySelector('#alert-box-toggle');
-const dropdownMenu = document.querySelector('#menu-dropdown');
-const dropdownMenuToggle = document.querySelector('#menu-dropdown-toggle');
 
 // Select plan modal related
 const selectPlanModal = document.querySelector('#select-plan-section');
@@ -115,9 +112,12 @@ setupStepCheckboxes.forEach((checkbox) => {
         // ELSE, continue with the rest of the function
 
         // To get the next unchecked checkbox, We have to consider two approaches;
-        // 1. We can assume that the next unchecked checkbox is after `this` checkbox. Therefore, we start the loop 
-        //    from the index of next checkbox after `this` checkbox and check all checkboxes that come after it
+        // 1. We can assume that the next unchecked checkbox is after `this` checkbox. Therefore, we start the loop count
+        //    from the index of `this` checkbox and check all checkboxes that come after it
         //    until we find the next unchecked checkbox or reach the end of the NodeList.
+        //    NOTE, we are starting the loop count from the index of `this` checkbox because 
+        //    if we start from the index of the next checkbox (which is the index of `this` checkbox + 1),
+        //    and `this` checkbox is the last checkbox in the NodeList, the loop will not run at all.
         // 
         // 2. If the loop reaches the end of the NodeList and the next unchecked checkbox has not been found yet,
         //    we can again assume that the next unchecked checkbox is before `this` checkbox, given that `this` checkbox 
@@ -136,7 +136,7 @@ setupStepCheckboxes.forEach((checkbox) => {
         };
 
         // Taking the first approach
-        for(let currentCheckboxIndex = this.index + 1; currentCheckboxIndex < setupStepCheckboxes.length; currentCheckboxIndex++) {
+        for(let currentCheckboxIndex = this.index; currentCheckboxIndex < setupStepCheckboxes.length; currentCheckboxIndex++) {
             if (isNextUncheckedCheckbox(currentCheckboxIndex)) {
                 nextUncheckedCheckbox = setupStepCheckboxes[currentCheckboxIndex];
                 break;
@@ -144,7 +144,7 @@ setupStepCheckboxes.forEach((checkbox) => {
 
             // If we have still not found the next unchecked and we have reached the end 
             // Nodelist. We go with the second approach. 
-            if (this.index != 0 && currentCheckboxIndex == (setupStepCheckboxes.length - 1)) {
+            if (this.index !== 0 && currentCheckboxIndex === (setupStepCheckboxes.length - 1)) {
 
                 // Redefined the function that checks if the next unchecked checkbox has been found.
                 // The new adaptation of the function will take in a checkbox index, and return true if the following conditions are met:
@@ -192,21 +192,6 @@ setupStepCheckboxes.forEach((checkbox) => {
 
 
 
-document.body.onclick = (e) => {
-    // Close header menus on outside click
-    if (!alertBox.contains(e.target) && !alertBoxToggle.contains(e.target) && alertBox.classList.contains('show-flex')) {
-        alertBox.classList.remove('show-flex');
-        setAriaExpandedByShowFlex(alertBox);
-    };
-
-    if (!dropdownMenu.contains(e.target) && !dropdownMenuToggle.contains(e.target) && dropdownMenu.classList.contains('show-flex')) {
-        dropdownMenu.classList.remove('show-flex');
-        setAriaExpandedByShowFlex(dropdownMenu);
-    };
-}
-
-
-
 // Prevent search form from submitting
 searchForm.onsubmit = (e) => {
     e.stopImmediatePropagation();
@@ -215,33 +200,28 @@ searchForm.onsubmit = (e) => {
 
 
 
-// Open/close notification/alert box on click or enter key press
-alertBoxToggle.onclick = () => {
-    alertBox.classList.toggle('show-flex');
-    setAriaExpandedByShowFlex(alertBox);
-}
+// Open/close header menus on toggle click or enter key press
+headerMenuToggles.forEach((toggle) => {
+    toggle.onclick = () => {
+        let headerMenu = toggle.parentElement.querySelector('.header-menu');
+        headerMenu.classList.toggle('show-flex');
+        setAriaExpandedByShowFlex(headerMenu);
 
-alertBoxToggle.onkeydown = (e) => {
-    if (e.key === 'Enter') {
-        // `alertBoxToggle.click()` is used instead of `alertBox.classList.toggle('show-flex')` so that
-        // if `click` event is disabled then keyboard `enter` will also be disabled
-        alertBoxToggle.click();
+        // Close other open header menus
+        headerMenus.forEach((menu) => {
+            if (menu !== headerMenu && menu.classList.contains('show-flex')) {
+                menu.classList.remove('show-flex');
+                setAriaExpanded(menu, false);
+            };
+        });
     };
-}
 
-
-
-// Open/close dropdown menu on click or enter key press
-dropdownMenuToggle.onclick = () => {
-    dropdownMenu.classList.toggle('show-flex');
-    setAriaExpandedByShowFlex(dropdownMenu);
-}
-
-dropdownMenuToggle.onkeydown = (e) => {
-    if (e.key === 'Enter') {
-        dropdownMenuToggle.click();
+    toggle.onkeydown = (e) => {
+        if (e.key === 'Enter') {
+            toggle.click();
+        };
     };
-}
+});
 
 
 
@@ -288,11 +268,7 @@ setupSteps.forEach((setupStep) => {
 
     setupStep.onkeydown = (e) => {
         if (e.key === 'Enter') {
-            // Expand setup step that received Enter key anywhere except its checkbox
-            // if it is not already expanded
-            if (!setupStepCheckbox.contains(e.target) && !setupStep.isExpanded()){
-                setupStep.expand();
-            };
+            setupStep.click();
         };
     };
     
