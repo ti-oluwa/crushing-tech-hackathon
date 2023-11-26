@@ -268,7 +268,9 @@ setupSteps.forEach((setupStep) => {
 
     setupStep.onkeydown = (e) => {
         if (e.key === 'Enter') {
-            setupStep.click();
+            if (!setupStepCheckbox.contains(e.target) && !setupStep.isExpanded()){
+                setupStep.expand();
+            };
         };
     };
     

@@ -1011,77 +1011,82 @@ a#header-logo:focus-visible{
 }
 
 
+/* All active states */
+
+#alert-shade > #alert-box-toggle:active, #menu > #menu-dropdown-toggle:active{
+    background: var(--gray-50);
+}
+
+#menu-dropdown > .dropdown-section .menu-item:active{
+    background: var(--state-pressed);
+}
+
+
+#select-plan-section #select-plan-btn:active{
+    border-radius: 6px;
+    background: #F7F7F7;
+    box-shadow: 0px 2px 1.5px 0px #E2E2E2 inset;
+}
+
+
+#setup-guide-toggle:active{
+    background: #F0F0F0;
+}
+
+.check:has(input:active) > svg > circle{
+    stroke-dasharray: 0;
+    fill: #D9D9D9;
+}
+
+.step-btns > .step-btn-dark:active{
+    background: #2B2B2B;
+    box-shadow: 0px 0px 0px 1.5px #333, 0px 3px 0px 0px #000 inset;
+}
+
+.step-btns > .step-btn-trans:active{
+    background: #E0E0E0;
+}
+
+
 
 /* *********************** Media Queries ********************** */
 
 /* ****** For devices that support mouse pointer events ****** */
 @media (hover:hover) {
-    /* Navigation Menu/Toggles/Icons States */
+    /* Navigation Menu/Toggles/Icons Hover States */
     #alert-shade > #alert-box-toggle:hover, #menu > #menu-dropdown-toggle:hover{
         background: var(--font-mid);
-    }
-
-    #alert-shade > #alert-box-toggle:active, #menu > #menu-dropdown-toggle:active{
-        background: var(--gray-50);
     }
 
     #menu-dropdown > .dropdown-section .menu-item:hover{
         background: var(--state-hover);
     }
 
-    #menu-dropdown > .dropdown-section .menu-item:active{
-        background: var(--state-pressed);
-    }
 
-
-    /* Select Plan Section Elements States */
+    /* Select Plan Section Elements Hover States */
     #select-plan-section #select-plan-btn:hover{
         border: 1px solid rgba(0, 0, 0, 0.10);
         background: #F7F7F7;
         box-shadow: 0px -1px 0px 0px #B5B5B5 inset;
     }
 
-    #select-plan-section #select-plan-btn:active{
-        border-radius: 6px;
-        background: #F7F7F7;
-        box-shadow: 0px 2px 1.5px 0px #E2E2E2 inset;
-    }
 
-
-    /* Setup Section Elements States */
+    /* Setup Section Elements Hover States */
 
     #setup-guide-toggle:hover{
         background: #F1F1F1;
-    }
-
-    #setup-guide-toggle:active{
-        background: #F0F0F0;
     }
 
     .check:has(input:hover) > svg > circle{
         stroke-dasharray: 0;
     }
 
-    .check:has(input:active) > svg > circle{
-        stroke-dasharray: 0;
-        fill: #D9D9D9;
-    }
-
     .step-btns > .step-btn-dark:hover{
         background: #2A2A2A;
     }
 
-    .step-btns > .step-btn-dark:active{
-        background: #2B2B2B;
-        box-shadow: 0px 0px 0px 1.5px #333, 0px 3px 0px 0px #000 inset;
-    }
-
     .step-btns > .step-btn-trans:hover{
         background: #E7E7E7;
-    }
-
-    .step-btns > .step-btn-trans:active{
-        background: #E0E0E0;
     }
 
 }
@@ -1166,7 +1171,7 @@ a#header-logo:focus-visible{
     #alert-shade > #alert-box{
         right: 50%;
         transform: translateX(50%);
-        max-width: 358px;
+        max-width: calc(100% - 32px);
     }
 
     #alert-body > #no-alert-msg{
@@ -1179,5 +1184,6 @@ a#header-logo:focus-visible{
     #menu > #menu-dropdown{
         right: 50%;
         transform: translateX(50%);
+        max-width: calc(100% - 32px);
     }
 }
